@@ -1,0 +1,31 @@
+Créditos de imágenes (temporales, solo para esta demo)
+========================================================
+Estas fotos son de Wikimedia Commons y tienen licencia CC BY / CC BY-SA,
+que exige atribución. Antes de publicar el sitio en producción:
+  1. Reemplázalas por fotos reales del portfolio del estudio (lo ideal), o
+  2. Si las conservas, añade el crédito correspondiente en el sitio.
+
+tattoo-machine.jpg
+  Autor: William Rafti (William Rafti Institute)
+  Licencia: CC BY 2.5
+  Origen: https://commons.wikimedia.org/wiki/File:Tattoo_machine_2_coil.jpg
+
+blackwork-dragon.jpg
+  Tatuaje de Mattia Jey (Horror Vacui Tattoo Parlour, Bolonia). Foto: Technopop.tattoo
+  Licencia: CC BY-SA 4.0
+  Origen: https://commons.wikimedia.org/wiki/File:Dragon_blackwork_tattoo.jpg
+
+blackwork-owl.jpg
+  Tatuaje y foto: @domcartertattoo (Dom Carter)
+  Licencia: CC BY-SA 4.0
+  Origen: https://commons.wikimedia.org/wiki/File:Dom_Carter_Blackwork_Owl_Tattoo.jpg
+
+color-back-tattoo.jpg
+  Autor: Miguel Discart
+  Licencia: CC BY-SA 2.0
+  Origen: https://commons.wikimedia.org/wiki/File:Colourful_back_tattoo.jpg
+
+tattoo-convention.jpg
+  Autor: James Gose (jimmyweee)
+  Licencia: CC BY 2.0
+  Origen: https://commons.wikimedia.org/wiki/File:Florence_Tattoo_Convention_(5158061891).jpg

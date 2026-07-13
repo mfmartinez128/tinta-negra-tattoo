@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    ══════════════════════════════════════════════════════════════
+    PERSONALIZA ESTOS DATOS ANTES DE PUBLICAR:
+    - Ciudad: "Ciudad de México" (buscar y reemplazar en todo el archivo)
+    - Teléfono WhatsApp: 521234567890 (buscar "521234567890" en todo el proyecto)
+    - Fotos en assets/img/: son fotos de stock (Wikimedia Commons, CC BY / CC BY-SA,
+      requieren atribución — ver assets/img/CREDITOS.txt). Antes de publicar de
+      verdad, reemplázalas por fotos reales del portfolio del estudio.
+    ══════════════════════════════════════════════════════════════
+  -->
+
+  <title>Tinta Negra Tattoo Studio | Tatuador en Ciudad de México</title>
+  <meta name="description" content="Estudio de tatuajes en Ciudad de México especializado en blackwork, realismo y fine line. Diseños personalizados y agenda 100% por WhatsApp.">
+  <meta name="keywords" content="tatuador Ciudad de México, estudio de tatuajes, tattoo studio, tatuajes personalizados, blackwork, fine line, realismo tatuaje">
+  <meta name="author" content="Tinta Negra Tattoo Studio">
+  <meta name="theme-color" content="#0a0a0d">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tinta Negra Tattoo Studio | Tatuador en Ciudad de México">
+  <meta property="og:description" content="Diseños personalizados, técnica precisa y agenda 100% por WhatsApp.">
+  <meta property="og:locale" content="es_MX">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0a0d'/%3E%3Ctext x='50' y='68' font-size='54' font-family='Georgia,serif' fill='url(%23g)' text-anchor='middle'%3ET%3C/text%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='100' y2='100'%3E%3Cstop offset='0' stop-color='%23ff8a3d'/%3E%3Cstop offset='.5' stop-color='%23ff3d8b'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ NAVEGACIÓN ============ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo">
+        <span class="logo__mark"></span>
+        TINTA<span>NEGRA</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li><a href="#problema" class="nav__link">Por qué nosotros</a></li>
+          <li><a href="#herramientas" class="nav__link">Estilos</a></li>
+          <li><a href="#precios" class="nav__link">Precios</a></li>
+          <li><a href="#opiniones" class="nav__link">Opiniones</a></li>
+        </ul>
+        <a
+          href="https://wa.me/521234567890?text=Hola%2C%20quiero%20agendar%20una%20cita%20para%20un%20tatuaje"
+          class="btn btn--primary btn--sm nav__cta"
+          target="_blank"
+          rel="noopener"
+        >
+          Agenda tu cita
+        </a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="container hero__content">
+      <div class="hero__col">
+        <a href="#opiniones" class="badge reveal">
+          <span class="badge__dot"></span>
+          +300 tatuajes realizados este año
+        </a>
+
+        <p class="hero__eyebrow reveal">Estudio de tatuajes en Ciudad de México · Blackwork, realismo y fine line</p>
+
+        <h1 class="hero__title reveal">El arte que llevarás <span class="text-gradient">para siempre</span></h1>
+
+        <p class="hero__subtitle reveal">Diseños personalizados, técnica precisa y un espacio pensado para que cada sesión sea una experiencia. Cupo limitado por semana.</p>
+
+        <div class="hero__actions reveal">
+          <a
+            href="https://wa.me/521234567890?text=Hola%2C%20quiero%20agendar%20una%20cita%20para%20un%20tatuaje"
+            class="btn btn--primary"
+            target="_blank"
+            rel="noopener"
+          >
+            Agenda tu cita
+          </a>
+          <a href="#problema" class="btn btn--ghost">Ver portfolio</a>
+        </div>
+
+        <div class="testimonial-mini reveal">
+          <div class="testimonial-mini__avatar" aria-hidden="true">AS</div>
+          <p>"Llegué con una idea a medias y salí con un diseño que superó lo que imaginaba. La atención por WhatsApp hizo todo súper fácil."<br><strong>Alex Soto</strong>, cliente desde 2023</p>
+        </div>
+      </div>
+
+      <div class="hero__col hero__gallery reveal" aria-hidden="true">
+        <div class="phantom-card phantom-card--call phantom-card--photo" style="background-image: url('assets/img/blackwork-dragon.jpg');">
+          <span class="phantom-card__tag phantom-card__tag--ok">Blackwork</span>
+          <span class="phantom-card__line"></span>
+          <span class="phantom-card__line phantom-card__line--sm"></span>
+        </div>
+        <div class="phantom-card phantom-card--chat">
+          <span class="phantom-card__tag">Fine line</span>
+          <span class="phantom-card__line"></span>
+          <span class="phantom-card__line phantom-card__line--sm"></span>
+        </div>
+        <div class="phantom-card phantom-card--calendar phantom-card--photo" style="background-image: url('assets/img/blackwork-owl.jpg');">
+          <span class="phantom-card__tag phantom-card__tag--accent">Realismo</span>
+          <span class="phantom-card__line"></span>
+          <span class="phantom-card__line phantom-card__line--sm"></span>
+        </div>
+        <div class="phantom-card">
+          <span class="phantom-card__tag">Cover-ups</span>
+          <span class="phantom-card__line"></span>
+          <span class="phantom-card__line phantom-card__line--sm"></span>
+        </div>
+        <div class="phantom-card phantom-card--photo" style="background-image: url('assets/img/color-back-tattoo.jpg');">
+          <span class="phantom-card__tag">Color</span>
+          <span class="phantom-card__line"></span>
+          <span class="phantom-card__line phantom-card__line--sm"></span>
+        </div>
+        <div class="phantom-card phantom-card--photo" style="background-image: url('assets/img/tattoo-machine.jpg');">
+          <span class="phantom-card__tag">Nuestro equipo</span>
+          <span class="phantom-card__line"></span>
+          <span class="phantom-card__line phantom-card__line--sm"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEMA / SOLUCIÓN ============ -->
+  <section class="section" id="problema">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="reveal">Encontrar un tatuador de confianza es <span class="text-gradient text-gradient--pink">difícil</span>.<br>Deja de arriesgarte.</h2>
+        <p class="reveal">Un mal diseño o un estudio sin los estándares de higiene correctos se queda contigo para siempre. Nosotros nos encargamos de que tu experiencia sea la correcta, de principio a fin.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-list">
+          <div class="feature-item reveal">
+            <span class="feature-item__icon feature-item__icon--orange" aria-hidden="true">✎</span>
+            <p class="feature-item__label feature-item__label--orange">Hacemos el trabajo pesado</p>
+            <h3>Diseños 100% personalizados</h3>
+            <p>Cada pieza se diseña desde cero según tu idea, tu piel y el estilo que buscas. Nada de catálogo ni diseños repetidos.</p>
+          </div>
+
+          <div class="feature-item reveal">
+            <span class="feature-item__icon feature-item__icon--purple" aria-hidden="true">✓</span>
+            <p class="feature-item__label feature-item__label--purple">Higiene y seguridad ante todo</p>
+            <h3>Material 100% desechable y esterilizado</h3>
+            <p>Trabajamos bajo los más altos estándares de bioseguridad, con material de un solo uso en cada sesión.</p>
+          </div>
+
+          <div class="feature-item reveal">
+            <span class="feature-item__icon feature-item__icon--pink" aria-hidden="true">💬</span>
+            <p class="feature-item__label feature-item__label--pink">Agenda simple por WhatsApp</p>
+            <h3>Sin llamadas ni formularios eternos</h3>
+            <p>Nos escribes, vemos referencias juntos y agendamos tu sesión directo por WhatsApp. Así de simple.</p>
+          </div>
+        </div>
+
+        <div class="device-mock reveal" aria-hidden="true">
+          <div class="device-mock__frame">
+            <div class="device-mock__topbar">Vista previa de tu diseño</div>
+            <div class="device-mock__grid">
+              <div class="device-mock__card"></div>
+              <div class="device-mock__card"></div>
+              <div class="device-mock__card device-mock__card--wide"></div>
+              <div class="device-mock__card"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ESTILOS ============ -->
+  <section class="section section--tools" id="herramientas">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="reveal">Tu tatuaje, en el estilo que <span class="text-gradient">tú quieras</span></h2>
+        <p class="reveal">Dominamos distintas técnicas para que el resultado se sienta tuyo, sin forzar un estilo que no encaja con la idea que traes.</p>
+      </div>
+
+      <div class="tools-fan reveal" aria-hidden="true">
+        <div class="tools-card tools-card--1">
+          <div class="tools-card__body tools-card__body--photo" style="background-image: url('assets/img/blackwork-dragon.jpg');">Blackwork</div>
+        </div>
+        <div class="tools-card tools-card--2">
+          <div class="tools-card__body">Fine line</div>
+        </div>
+        <div class="tools-card tools-card--3">
+          <div class="tools-card__body tools-card__body--photo" style="background-image: url('assets/img/blackwork-owl.jpg');">Realismo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="section" id="resultados">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="reveal">A nuestros clientes les <span class="text-gradient text-gradient--pink">encanta</span> el resultado</h2>
+        <p class="reveal">Un tatuaje es una decisión para toda la vida. Esto es lo que dicen los números de quienes ya pasaron por el estudio.</p>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat">
+          <p class="stat__number stat__number--green">500+</p>
+          <p class="stat__label">Tatuajes realizados</p>
+          <p class="stat__desc">Diseños únicos entregados a nuestros clientes en los últimos dos años.</p>
+        </div>
+        <div class="stat__divider" aria-hidden="true"></div>
+        <div class="stat">
+          <p class="stat__number stat__number--blue">4.9★</p>
+          <p class="stat__label">Valoración promedio</p>
+          <p class="stat__desc">Calificación de nuestros clientes en Google y redes sociales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALERÍA / PORTFOLIO ============ -->
+  <section class="section" id="galeria">
+    <div class="container">
+      <div class="gallery reveal">
+        <div class="gallery__grid" aria-hidden="true">
+          <div class="gallery__card gallery__card--photo" style="background-image: url('assets/img/blackwork-dragon.jpg');"></div>
+          <div class="gallery__card gallery__card--photo" style="background-image: url('assets/img/tattoo-convention.jpg');"></div>
+          <div class="gallery__card gallery__card--photo" style="background-image: url('assets/img/blackwork-owl.jpg');"></div>
+          <div class="gallery__card gallery__card--photo" style="background-image: url('assets/img/color-back-tattoo.jpg');"></div>
+          <div class="gallery__card gallery__card--photo" style="background-image: url('assets/img/tattoo-machine.jpg');"></div>
+          <div class="gallery__card"></div>
+        </div>
+        <div class="gallery__overlay">
+          <p class="gallery__kicker">Blackwork · Realismo · Fine line</p>
+          <p class="gallery__badge">+300 diseños en el portfolio</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AGENDA TU CITA ============ -->
+  <section class="section" id="precios">
+    <div class="container">
+      <div class="pricing">
+        <div class="pricing__info">
+          <h2>Así es agendar tu cita en <span class="text-gradient">Tinta Negra</span></h2>
+
+          <div class="benefit reveal">
+            <span class="benefit__icon benefit__icon--orange" aria-hidden="true">⚡</span>
+            <div>
+              <p class="benefit__title">Respuesta en menos de 24 horas</p>
+              <p class="benefit__desc">Te confirmamos disponibilidad y presupuesto directo por WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="benefit reveal">
+            <span class="benefit__icon benefit__icon--purple" aria-hidden="true">✎</span>
+            <div>
+              <p class="benefit__title">Boceto incluido en la consulta</p>
+              <p class="benefit__desc">Antes de tatuar, revisamos el diseño juntos hasta que quede exactamente como lo imaginas.</p>
+            </div>
+          </div>
+
+          <div class="benefit reveal">
+            <span class="benefit__icon benefit__icon--pink" aria-hidden="true">🛡</span>
+            <div>
+              <p class="benefit__title">Garantía de retoque gratuito</p>
+              <p class="benefit__desc">Si algo no cicatriza como esperabas, el primer retoque corre por nuestra cuenta.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pricing__card reveal">
+          <span class="pricing__tag">SESIÓN DE VALORACIÓN</span>
+          <p class="pricing__price">Gratis<span>primera consulta</span></p>
+          <ul class="pricing__list">
+            <li>Consulta y boceto inicial sin costo</li>
+            <li>Presupuesto cerrado antes de tatuar</li>
+            <li>Material 100% desechable y esterilizado</li>
+            <li>Cupo limitado por semana</li>
+          </ul>
+          <a
+            href="https://wa.me/521234567890?text=Hola%2C%20quiero%20agendar%20una%20cita%20para%20un%20tatuaje"
+            class="btn btn--primary pricing__cta"
+            target="_blank"
+            rel="noopener"
+          >
+            Agenda tu cita
+          </a>
+          <p class="pricing__guarantee">🔒 Sin compromiso, cancelas cuando quieras</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIO GRANDE ============ -->
+  <section class="section" id="opiniones">
+    <div class="container">
+      <div class="quote reveal">
+        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+        <p class="quote__text">Investigué varios estudios antes de decidirme y Tinta Negra fue la única opción donde sentí total confianza desde la consulta. <span class="quote__highlight">El resultado quedó mejor de lo que había imaginado</span>.</p>
+        <div class="quote__author">
+          <div class="quote__avatar" aria-hidden="true">DR</div>
+          <div>
+            <p class="quote__name">Daniela Ríos</p>
+            <p class="quote__role">Cliente, sesión de realismo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#inicio" class="logo">
+          <span class="logo__mark"></span>
+          TINTA<span>NEGRA</span>
+        </a>
+        <p>Estudio de tatuajes en Ciudad de México especializado en blackwork, realismo y fine line.</p>
+        <p class="footer__badge">Cupo limitado por semana</p>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__heading">Estudio</p>
+        <a href="#problema">Por qué nosotros</a>
+        <a href="#herramientas">Estilos</a>
+        <a href="#">Términos</a>
+        <a href="#">Privacidad</a>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__heading">Soporte</p>
+        <a href="https://wa.me/521234567890?text=Hola%2C%20quiero%20agendar%20una%20cita%20para%20un%20tatuaje" target="_blank" rel="noopener">Contacto</a>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__heading">Sobre nosotros</p>
+        <a href="#">Hecho por Manuel Martínez</a>
+      </div>
+    </div>
+    <div class="container footer__legal">
+      <p>© 2026 Tinta Negra Tattoo Studio. Todos los derechos reservados.</p>
+    </div>
+    <div class="footer__glow" aria-hidden="true"></div>
+  </footer>
+
+  <!-- ============ BOTÓN FLOTANTE DE WHATSAPP ============ -->
+  <a
+    href="https://wa.me/521234567890?text=Hola%2C%20quiero%20agendar%20una%20cita%20para%20un%20tatuaje"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="Chatea por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5C10 9 9.5 7.7 9.3 7.2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.5 1.1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.5c1.5.8 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3.1 1 1-3-.2-.3C3.9 15 3.4 13.5 3.4 12c0-4.7 3.9-8.6 8.6-8.6s8.6 3.9 8.6 8.6-3.9 8.6-8.6 8.6z"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
