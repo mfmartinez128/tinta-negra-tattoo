@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initHeaderScroll();
   initScrollReveal();
+  initTilt3D();
+  initParallax();
 });
 
 /* ---------- Menú móvil (hamburguesa) ---------- */
@@ -68,4 +70,73 @@ function initScrollReveal() {
   );
 
   elements.forEach((el) => observer.observe(el));
+}
+
+/* ---------- Inclinación 3D al mover el mouse (tarjetas) ---------- */
+function initTilt3D() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const cards = document.querySelectorAll(
+    '.phantom-card, .tools-card, .gallery__card, .pricing__card'
+  );
+  if (!cards.length) return;
+
+  const MAX_TILT = 10; // grados
+  const MAX_LIFT = 18; // px de translateZ
+
+  cards.forEach((card) => {
+    // Los dispositivos táctiles no disparan mousemove de forma útil: se ignoran.
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    card.addEventListener('mousemove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width; // 0 → 1
+      const y = (event.clientY - rect.top) / rect.height; // 0 → 1
+
+      const tiltY = (x - 0.5) * MAX_TILT * 2;
+      const tiltX = (0.5 - y) * MAX_TILT * 2;
+
+      card.style.setProperty('--tiltX', `${tiltX.toFixed(2)}deg`);
+      card.style.setProperty('--tiltY', `${tiltY.toFixed(2)}deg`);
+      card.style.setProperty('--tiltZ', `${MAX_LIFT}px`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--tiltX', '0deg');
+      card.style.setProperty('--tiltY', '0deg');
+      card.style.setProperty('--tiltZ', '0px');
+    });
+  });
+}
+
+/* ---------- Parallax sutil de la galería del hero al hacer scroll ---------- */
+function initParallax() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const gallery = document.querySelector('.hero__gallery');
+  if (!gallery) return;
+
+  let ticking = false;
+
+  const update = () => {
+    const offset = window.scrollY;
+    // Se detiene el efecto una vez el hero sale de pantalla para no afectar el resto.
+    if (offset < window.innerHeight) {
+      gallery.style.setProperty('--parallaxY', `${offset * 0.12}px`);
+    }
+    ticking = false;
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
 }

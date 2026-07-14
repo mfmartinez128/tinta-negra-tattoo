@@ -443,6 +443,7 @@ h1, h2, h3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  perspective: 1400px;
 }
 
 .phantom-card {
@@ -455,6 +456,21 @@ h1, h2, h3 {
   gap: 0.6rem;
   aspect-ratio: 4 / 3;
   justify-content: center;
+  transform: perspective(900px) translateY(var(--parallaxY, 0px)) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg)) translateZ(var(--tiltZ, 0px));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.phantom-card:hover {
+  box-shadow: 0 24px 45px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__gallery,
+  .phantom-card {
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .phantom-card--call,
@@ -652,25 +668,47 @@ h1, h2, h3 {
   border-radius: var(--radius);
   padding: 0.9rem 1rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: perspective(1000px) rotate(var(--rot, 0deg)) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg)) translateZ(var(--tiltZ, 0px));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.tools-card:hover {
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.55);
+  z-index: 3;
 }
 
 .tools-card--1 {
-  left: calc(50% - 220px);
-  top: 30px;
-  transform: rotate(-8deg);
+  left: calc(50% - 265px);
+  top: 40px;
+  --rot: -12deg;
 }
 
 .tools-card--2 {
-  left: calc(50% - 130px);
-  top: 0;
-  transform: rotate(0deg);
+  left: calc(50% - 175px);
+  top: 10px;
+  --rot: -4deg;
   z-index: 2;
 }
 
 .tools-card--3 {
-  left: calc(50% - 40px);
-  top: 30px;
-  transform: rotate(8deg);
+  left: calc(50% - 85px);
+  top: 10px;
+  --rot: 4deg;
+  z-index: 2;
+}
+
+.tools-card--4 {
+  left: calc(50% + 5px);
+  top: 40px;
+  --rot: 12deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tools-card {
+    transform: perspective(1000px) rotate(var(--rot, 0deg)) !important;
+    transition: none !important;
+  }
 }
 
 .tools-card__dot {
@@ -707,16 +745,17 @@ h1, h2, h3 {
 
 @media (max-width: 767px) {
   .tools-fan {
-    height: 420px;
+    height: 590px;
   }
 
   .tools-card {
     width: 200px;
   }
 
-  .tools-card--1 { left: calc(50% - 100px); top: 0; transform: none; }
-  .tools-card--2 { left: calc(50% - 100px); top: 145px; transform: none; }
-  .tools-card--3 { left: calc(50% - 100px); top: 290px; transform: none; }
+  .tools-card--1 { left: calc(50% - 100px); top: 0; --rot: 0deg; }
+  .tools-card--2 { left: calc(50% - 100px); top: 140px; --rot: 0deg; }
+  .tools-card--3 { left: calc(50% - 100px); top: 280px; --rot: 0deg; }
+  .tools-card--4 { left: calc(50% - 100px); top: 420px; --rot: 0deg; }
 }
 
 /* ==========================================================================
@@ -789,12 +828,26 @@ h1, h2, h3 {
 .gallery__card {
   aspect-ratio: 1.3 / 1;
   background-color: var(--color-surface);
+  transform: perspective(800px) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg)) translateZ(var(--tiltZ, 0px));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
+  will-change: transform;
 }
 
 .gallery__card--photo {
   background-size: cover;
   background-position: center;
   filter: grayscale(0.25) brightness(0.75);
+}
+
+.gallery__card--photo:hover {
+  filter: grayscale(0) brightness(0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__card {
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .gallery__overlay {
@@ -883,6 +936,20 @@ h1, h2, h3 {
   border-radius: var(--radius);
   padding: 2.2rem;
   text-align: center;
+  transform: perspective(1200px) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg)) translateZ(var(--tiltZ, 0px));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.pricing__card:hover {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing__card {
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .pricing__tag {

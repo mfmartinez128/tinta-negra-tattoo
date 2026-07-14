@@ -29,3 +29,27 @@ tattoo-convention.jpg
   Autor: James Gose (jimmyweee)
   Licencia: CC BY 2.0
   Origen: https://commons.wikimedia.org/wiki/File:Florence_Tattoo_Convention_(5158061891).jpg
+
+fine-line.jpg
+  Autor: Saishna96
+  Licencia: CC BY-SA 4.0
+  Origen: https://commons.wikimedia.org/wiki/File:Aaira_Tattoo_on_Wrist.jpg
+
+cover-up.jpg
+  Autor: AnjanaTattoo
+  Licencia: CC BY-SA 4.0
+  Origen: https://commons.wikimedia.org/wiki/File:Cover_Up_Tattoo_Kolibri.jpg
+
+realismo.jpg
+  Autor: Andrea Afferni
+  Licencia: CC BY-SA 3.0
+  Origen: https://commons.wikimedia.org/wiki/File:A039-andreaafferni-seminars-seminar-tattoo-tattoos-tatuaggi-portrait-ritratto-realism.jpg
+
+micro-realismo.jpg
+  Tatuaje de Alan Hindes. Foto: Gypates
+  Licencia: CC BY-SA 4.0
+  Origen: https://commons.wikimedia.org/wiki/File:Leopard_tattoo_%E2%80%94_Alan_Hindes_%E2%80%94_2025.jpg
+  Nota: no existe en Wikimedia una foto etiquetada como "micro realismo" en sentido
+  estricto; se usó la aproximación más cercana disponible (retrato animal pequeño
+  e hiperdetallado). Si se quiere ilustrar micro-realismo de forma más literal,
+  reemplazar por una foto real de una pieza pequeña (ej. 5x5cm) del portfolio del estudio.
