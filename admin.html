@@ -509,6 +509,7 @@
   var state = {
     content: null,       // último contenido conocido (publicado)
     pendingUploads: {},  // key -> { file, path }
+    isPublishing: false,
     conn: { owner: '', repo: '', branch: 'main', token: '' }
   };
 
@@ -975,7 +976,24 @@
     });
   }
 
+  function putContentJsonWithRetry(retriesLeft) {
+    return ghGetSha('content.json').then(function (sha) {
+      var draft = buildDraftContent();
+      var json = JSON.stringify(draft, null, 2);
+      return ghPut('content.json', base64EncodeUnicode(json), 'Actualizar contenido del sitio desde el panel de control', sha)
+        .catch(function (err) {
+          // 409: alguien (u otra pestaña/clic) publicó justo en el medio. Reintenta una vez con el sha nuevo.
+          if (retriesLeft > 0 && /Error 409/.test(err.message)) {
+            return putContentJsonWithRetry(retriesLeft - 1);
+          }
+          throw err;
+        });
+    });
+  }
+
   function publishChanges() {
+    if (state.isPublishing) return;
+
     if (!state.conn.owner || !state.conn.repo || !state.conn.token) {
       showBanner('Completa y guarda la conexión con GitHub (usuario, repositorio y token) antes de publicar.', 'error');
       formCol.querySelector('.admin-section').classList.add('is-open');
@@ -998,6 +1016,7 @@
     }
 
     var publishBtn = document.getElementById('btnPublish');
+    state.isPublishing = true;
     publishBtn.disabled = true;
     publishBtn.textContent = 'Publicando…';
     hideBanner();
@@ -1015,20 +1034,17 @@
     });
 
     uploadChain
-      .then(function () { return ghGetSha('content.json'); })
-      .then(function (sha) {
-        var draft = buildDraftContent();
-        var json = JSON.stringify(draft, null, 2);
-        return ghPut('content.json', base64EncodeUnicode(json), 'Actualizar contenido del sitio desde el panel de control', sha);
-      })
+      .then(function () { return putContentJsonWithRetry(1); })
       .then(function () {
         state.pendingUploads = {};
+        state.isPublishing = false;
         publishBtn.disabled = false;
         publishBtn.textContent = 'Publicar cambios';
         showBanner('Publicado. GitHub Pages puede tardar ~1 minuto en mostrar los cambios en la web real.', 'success');
         fetchPublishedContent();
       })
       .catch(function (err) {
+        state.isPublishing = false;
         publishBtn.disabled = false;
         publishBtn.textContent = 'Publicar cambios';
         showBanner(err.message, 'error');
