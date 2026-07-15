@@ -17,12 +17,30 @@
     "testimonialAuthor": "Alex Soto",
     "testimonialMeta": "cliente desde 2023",
     "gallery": [
-      { "tag": "Blackwork", "image": "assets/img/blackwork-dragon.jpg" },
-      { "tag": "Fine line", "image": "assets/img/fine-line.jpg" },
-      { "tag": "Realismo", "image": "assets/img/realismo.jpg" },
-      { "tag": "Cover-ups", "image": "assets/img/cover-up.jpg" },
-      { "tag": "Color", "image": "assets/img/color-back-tattoo.jpg" },
-      { "tag": "Nuestro equipo", "image": "assets/img/tattoo-machine.jpg" }
+      {
+        "tag": "Blackwork",
+        "image": "assets/img/blackwork-dragon.jpg"
+      },
+      {
+        "tag": "Fine line",
+        "image": "assets/img/fine-line.jpg"
+      },
+      {
+        "tag": "Realismo",
+        "image": "assets/img/realismo.jpg"
+      },
+      {
+        "tag": "Cover-ups",
+        "image": "assets/img/cover-up.jpg"
+      },
+      {
+        "tag": "Color",
+        "image": "assets/img/color-back-tattoo.jpg"
+      },
+      {
+        "tag": "Nuestro equipo",
+        "image": "assets/img/tattoo-machine.jpg"
+      }
     ]
   },
   "problema": {
@@ -56,10 +74,22 @@
     "titleHighlight": "tú quieras",
     "description": "Dominamos distintas técnicas para que el resultado se sienta tuyo, sin forzar un estilo que no encaja con la idea que traes.",
     "cards": [
-      { "label": "Blackwork", "image": "assets/img/blackwork-dragon.jpg" },
-      { "label": "Fine line", "image": "assets/img/fine-line.jpg" },
-      { "label": "Realismo", "image": "assets/img/realismo.jpg" },
-      { "label": "Micro realismo", "image": "assets/img/micro-realismo.jpg" }
+      {
+        "label": "Blackwork",
+        "image": "assets/img/blackwork-dragon.jpg"
+      },
+      {
+        "label": "Fine line",
+        "image": "assets/img/fine-line.jpg"
+      },
+      {
+        "label": "Realismo",
+        "image": "assets/img/realismo.jpg"
+      },
+      {
+        "label": "Micro realismo",
+        "image": "assets/img/micro-realismo.jpg"
+      }
     ]
   },
   "stats": {
@@ -68,8 +98,16 @@
     "titlePart2": "el resultado",
     "description": "Un tatuaje es una decisión para toda la vida. Esto es lo que dicen los números de quienes ya pasaron por el estudio.",
     "items": [
-      { "number": "500+", "label": "Tatuajes realizados", "desc": "Diseños únicos entregados a nuestros clientes en los últimos dos años." },
-      { "number": "4.9★", "label": "Valoración promedio", "desc": "Calificación de nuestros clientes en Google y redes sociales." }
+      {
+        "number": "500+",
+        "label": "Tatuajes realizados",
+        "desc": "Diseños únicos entregados a nuestros clientes en los últimos dos años."
+      },
+      {
+        "number": "4.9★",
+        "label": "Valoración promedio",
+        "desc": "Calificación de nuestros clientes en Google y redes sociales."
+      }
     ]
   },
   "galeria": {
@@ -88,9 +126,21 @@
     "titlePart1": "Así es agendar tu cita en",
     "titleHighlight": "Tinta Negra",
     "benefits": [
-      { "icon": "⚡", "title": "Respuesta en menos de 24 horas", "desc": "Te confirmamos disponibilidad y presupuesto directo por Instagram." },
-      { "icon": "✎", "title": "Boceto incluido en la consulta", "desc": "Antes de tatuar, revisamos el diseño juntos hasta que quede exactamente como lo imaginas." },
-      { "icon": "🛡", "title": "Garantía de retoque gratuito", "desc": "Si algo no cicatriza como esperabas, el primer retoque corre por nuestra cuenta." }
+      {
+        "icon": "⚡",
+        "title": "Respuesta en menos de 24 horas",
+        "desc": "Te confirmamos disponibilidad y presupuesto directo por Instagram."
+      },
+      {
+        "icon": "✎",
+        "title": "Boceto incluido en la consulta",
+        "desc": "Antes de tatuar, revisamos el diseño juntos hasta que quede exactamente como lo imaginas."
+      },
+      {
+        "icon": "🛡",
+        "title": "Garantía de retoque gratuito",
+        "desc": "Si algo no cicatriza como esperabas, el primer retoque corre por nuestra cuenta."
+      }
     ],
     "cardTag": "SESIÓN DE VALORACIÓN",
     "cardPrice": "Gratis",
