@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "instagramUrl": "https://www.instagram.com/lonecesito_yaa/"
+  },
+  "nav": {
+    "ctaLabel": "Agenda tu cita"
+  },
+  "hero": {
+    "badge": "+300 tatuajes realizados este año",
+    "eyebrow": "Estudio de tatuajes en Barcelona · Blackwork, realismo y fine line",
+    "titleMain": "El arte que llevarás",
+    "titleHighlight": "para siempre",
+    "subtitle": "Diseños personalizados, técnica precisa y un espacio pensado para que cada sesión sea una experiencia. Cupo limitado por semana.",
+    "ctaPrimaryLabel": "Agenda tu cita",
+    "ctaGhostLabel": "Ver portfolio",
+    "testimonialQuote": "\"Llegué con una idea a medias y salí con un diseño que superó lo que imaginaba. La atención por Instagram hizo todo súper fácil.\"",
+    "testimonialAuthor": "Alex Soto",
+    "testimonialMeta": "cliente desde 2023",
+    "gallery": [
+      { "tag": "Blackwork", "image": "assets/img/blackwork-dragon.jpg" },
+      { "tag": "Fine line", "image": "assets/img/fine-line.jpg" },
+      { "tag": "Realismo", "image": "assets/img/realismo.jpg" },
+      { "tag": "Cover-ups", "image": "assets/img/cover-up.jpg" },
+      { "tag": "Color", "image": "assets/img/color-back-tattoo.jpg" },
+      { "tag": "Nuestro equipo", "image": "assets/img/tattoo-machine.jpg" }
+    ]
+  },
+  "problema": {
+    "titlePart1": "Encontrar un tatuador de confianza es",
+    "titleHighlight": "difícil",
+    "titlePart2": "Deja de arriesgarte.",
+    "description": "Un mal diseño o un estudio sin los estándares de higiene correctos se queda contigo para siempre. Nosotros nos encargamos de que tu experiencia sea la correcta, de principio a fin.",
+    "features": [
+      {
+        "icon": "✎",
+        "label": "Hacemos el trabajo pesado",
+        "title": "Diseños 100% personalizados",
+        "text": "Cada pieza se diseña desde cero según tu idea, tu piel y el estilo que buscas. Nada de catálogo ni diseños repetidos."
+      },
+      {
+        "icon": "✓",
+        "label": "Higiene y seguridad ante todo",
+        "title": "Material 100% desechable y esterilizado",
+        "text": "Trabajamos bajo los más altos estándares de bioseguridad, con material de un solo uso en cada sesión."
+      },
+      {
+        "icon": "💬",
+        "label": "Agenda simple por Instagram",
+        "title": "Sin llamadas ni formularios eternos",
+        "text": "Nos escribes, vemos referencias juntos y agendamos tu sesión directo por Instagram. Así de simple."
+      }
+    ]
+  },
+  "estilos": {
+    "titlePart1": "Tu tatuaje, en el estilo que",
+    "titleHighlight": "tú quieras",
+    "description": "Dominamos distintas técnicas para que el resultado se sienta tuyo, sin forzar un estilo que no encaja con la idea que traes.",
+    "cards": [
+      { "label": "Blackwork", "image": "assets/img/blackwork-dragon.jpg" },
+      { "label": "Fine line", "image": "assets/img/fine-line.jpg" },
+      { "label": "Realismo", "image": "assets/img/realismo.jpg" },
+      { "label": "Micro realismo", "image": "assets/img/micro-realismo.jpg" }
+    ]
+  },
+  "stats": {
+    "titlePart1": "A nuestros clientes les",
+    "titleHighlight": "encanta",
+    "titlePart2": "el resultado",
+    "description": "Un tatuaje es una decisión para toda la vida. Esto es lo que dicen los números de quienes ya pasaron por el estudio.",
+    "items": [
+      { "number": "500+", "label": "Tatuajes realizados", "desc": "Diseños únicos entregados a nuestros clientes en los últimos dos años." },
+      { "number": "4.9★", "label": "Valoración promedio", "desc": "Calificación de nuestros clientes en Google y redes sociales." }
+    ]
+  },
+  "galeria": {
+    "images": [
+      "assets/img/blackwork-dragon.jpg",
+      "assets/img/tattoo-convention.jpg",
+      "assets/img/blackwork-owl.jpg",
+      "assets/img/color-back-tattoo.jpg",
+      "assets/img/tattoo-machine.jpg",
+      "assets/img/micro-realismo.jpg"
+    ],
+    "kicker": "Blackwork · Realismo · Fine line · Micro realismo",
+    "badge": "+300 diseños en el portfolio"
+  },
+  "precios": {
+    "titlePart1": "Así es agendar tu cita en",
+    "titleHighlight": "Tinta Negra",
+    "benefits": [
+      { "icon": "⚡", "title": "Respuesta en menos de 24 horas", "desc": "Te confirmamos disponibilidad y presupuesto directo por Instagram." },
+      { "icon": "✎", "title": "Boceto incluido en la consulta", "desc": "Antes de tatuar, revisamos el diseño juntos hasta que quede exactamente como lo imaginas." },
+      { "icon": "🛡", "title": "Garantía de retoque gratuito", "desc": "Si algo no cicatriza como esperabas, el primer retoque corre por nuestra cuenta." }
+    ],
+    "cardTag": "SESIÓN DE VALORACIÓN",
+    "cardPrice": "Gratis",
+    "cardPriceMeta": "primera consulta",
+    "cardList": [
+      "Consulta y boceto inicial sin costo",
+      "Presupuesto cerrado antes de tatuar",
+      "Material 100% desechable y esterilizado",
+      "Cupo limitado por semana"
+    ],
+    "cardCtaLabel": "Agenda tu cita",
+    "cardGuarantee": "🔒 Sin compromiso, cancelas cuando quieras"
+  },
+  "opiniones": {
+    "quote": "Investigué varios estudios antes de decidirme y Tinta Negra fue la única opción donde sentí total confianza desde la consulta.",
+    "highlight": "El resultado quedó mejor de lo que había imaginado",
+    "authorName": "Daniela Ríos",
+    "authorRole": "Cliente, sesión de realismo"
+  },
+  "footer": {
+    "description": "Estudio de tatuajes en Barcelona especializado en blackwork, realismo y fine line.",
+    "badge": "Cupo limitado por semana",
+    "legal": "© 2026 Tinta Negra Tattoo Studio. Todos los derechos reservados.",
+    "madeBy": "Hecho por Manuel Martínez"
+  }
+}

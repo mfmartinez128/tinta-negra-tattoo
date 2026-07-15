@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de control — Tinta Negra</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+  body.admin {
+    background: var(--color-bg);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ---------- Pantalla de bloqueo ---------- */
+  .lock-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .lock-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+  }
+
+  .lock-card h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .lock-card p {
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 1.4rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- Layout general ---------- */
+  .admin-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.5rem;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+  }
+
+  .admin-topbar__title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: var(--color-surface-alt);
+    color: var(--color-text-muted);
+  }
+
+  .status-pill__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #6b6b6b;
+  }
+
+  .status-pill.is-ok .status-pill__dot { background: #d9d9d9; }
+  .status-pill.is-error .status-pill__dot { background: #9a4a4a; }
+
+  .admin-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .admin-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  @media (min-width: 1100px) {
+    .admin-layout {
+      grid-template-columns: minmax(0, 1fr) 420px;
+      align-items: start;
+    }
+  }
+
+  .admin-form-col {
+    padding: 1.5rem;
+    max-width: 720px;
+  }
+
+  @media (min-width: 1100px) {
+    .admin-form-col { margin: 0 auto; }
+  }
+
+  .admin-preview-col {
+    padding: 1.5rem;
+    position: sticky;
+    top: 64px;
+  }
+
+  .preview-frame-wrap {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .preview-frame-wrap iframe {
+    width: 100%;
+    height: 70vh;
+    border: 0;
+    background: #fff;
+    display: block;
+  }
+
+  .preview-frame-wrap__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- Tarjetas de sección del formulario ---------- */
+  .admin-section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+  }
+
+  .admin-section__head {
+    padding: 1rem 1.3rem;
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+
+  .admin-section__head h2 {
+    font-size: 0.95rem;
+    font-family: var(--font-heading);
+  }
+
+  .admin-section__chevron {
+    color: var(--color-text-muted);
+    transition: transform 0.25s ease;
+    font-size: 0.8rem;
+  }
+
+  .admin-section.is-open .admin-section__chevron { transform: rotate(180deg); }
+
+  .admin-section__body {
+    padding: 1.2rem 1.3rem 1.4rem;
+    display: none;
+  }
+
+  .admin-section.is-open .admin-section__body { display: block; }
+
+  .field {
+    margin-bottom: 1rem;
+  }
+
+  .field:last-child { margin-bottom: 0; }
+
+  .field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .field input[type="text"],
+  .field input[type="url"],
+  .field input[type="password"],
+  .field textarea {
+    width: 100%;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.75rem;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--color-text-muted);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 4.2em;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  @media (max-width: 560px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  .image-field {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+  }
+
+  .image-field__thumb {
+    width: 84px;
+    height: 84px;
+    flex: none;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface-alt);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--color-border);
+  }
+
+  .image-field__controls {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .image-field__controls input[type="text"] {
+    margin-bottom: 0.45rem;
+  }
+
+  .file-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .file-btn:hover { color: var(--color-text); }
+  .file-btn input[type="file"] { display: none; }
+
+  .field-hint {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    margin-top: 0.3rem;
+  }
+
+  .btn--sm-admin {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.85rem;
+  }
+
+  .banner {
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    margin: 0 1.5rem 1rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-alt);
+    color: var(--color-text-muted);
+    display: none;
+  }
+
+  .banner.is-visible { display: block; }
+  .banner.is-success { border-color: #4a4a4a; color: #e5e5e5; }
+  .banner.is-error { border-color: #6b3a3a; color: #d9a3a3; }
+
+  .conn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  @media (max-width: 560px) {
+    .conn-grid { grid-template-columns: 1fr; }
+  }
+
+  .muted-note {
+    font-size: 0.76rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-top: 0.6rem;
+  }
+</style>
+</head>
+<body class="admin">
+
+  <!-- ============ PANTALLA DE BLOQUEO ============ -->
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-card">
+      <h1 id="lockTitle">Panel de control</h1>
+      <p id="lockText">Escribe tu clave de acceso para entrar. Esto solo evita clics accidentales de quien encuentre esta URL — la protección real de tus datos es el token de GitHub, que se guarda únicamente en este navegador y nunca se sube al repositorio.</p>
+      <div class="field">
+        <label for="lockInput">Clave de acceso</label>
+        <input type="password" id="lockInput" autocomplete="off">
+      </div>
+      <button class="btn btn--primary" id="lockSubmit" style="width:100%; margin-top:0.5rem;">Entrar</button>
+      <p class="muted-note" id="lockError" style="display:none; color:#d9a3a3;">Clave incorrecta.</p>
+    </div>
+  </div>
+
+  <!-- ============ PANEL PRINCIPAL ============ -->
+  <div id="panel" style="display:none;">
+
+    <div class="admin-topbar">
+      <div class="admin-topbar__title">
+        Panel de control · Tinta Negra
+        <span class="status-pill" id="connStatus"><span class="status-pill__dot"></span><span id="connStatusText">Sin conectar</span></span>
+      </div>
+      <div class="admin-topbar__actions">
+        <a href="index.html" target="_blank" class="btn btn--ghost btn--sm-admin">Ver sitio en vivo ↗</a>
+        <button class="btn btn--ghost btn--sm-admin" id="btnReset">Descartar cambios</button>
+        <button class="btn btn--primary btn--sm-admin" id="btnPublish">Publicar cambios</button>
+      </div>
+    </div>
+
+    <div class="banner" id="banner"></div>
+
+    <div class="admin-layout">
+      <div class="admin-form-col" id="formCol">
+        <!-- Las secciones del formulario se generan por JS -->
+      </div>
+
+      <div class="admin-preview-col">
+        <div class="preview-frame-wrap">
+          <div class="preview-frame-wrap__bar">
+            <span>Vista previa en vivo (sin publicar)</span>
+          </div>
+          <iframe id="previewFrame" src="index.html" title="Vista previa"></iframe>
+        </div>
+        <p class="muted-note">La vista previa se actualiza sola mientras escribes. Los cambios no quedan en la web real hasta que aprietas <strong>Publicar cambios</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= Esquema del formulario ================= */
+  var SCHEMA = [
+    { section: 'Enlace de contacto', fields: [
+      { key: 'meta.instagramUrl', label: 'URL de Instagram / contacto (usado en todos los botones "Agenda tu cita")', type: 'url' }
+    ]},
+    { section: 'Menú de navegación', fields: [
+      { key: 'nav.ctaLabel', label: 'Texto del botón del menú', type: 'text' }
+    ]},
+    { section: 'Portada (hero)', fields: [
+      { key: 'hero.badge', label: 'Insignia superior', type: 'text' },
+      { key: 'hero.eyebrow', label: 'Texto pequeño sobre el título', type: 'text' },
+      { key: 'hero.titleMain', label: 'Título — parte 1', type: 'text' },
+      { key: 'hero.titleHighlight', label: 'Título — parte destacada', type: 'text' },
+      { key: 'hero.subtitle', label: 'Subtítulo', type: 'textarea' },
+      { key: 'hero.ctaPrimaryLabel', label: 'Texto botón principal', type: 'text' },
+      { key: 'hero.ctaGhostLabel', label: 'Texto botón secundario', type: 'text' },
+      { key: 'hero.testimonialQuote', label: 'Cita del mini-testimonio', type: 'textarea' },
+      { key: 'hero.testimonialAuthor', label: 'Autor del mini-testimonio', type: 'text' },
+      { key: 'hero.testimonialMeta', label: 'Detalle del autor (ej. "cliente desde 2023")', type: 'text' },
+      { key: 'hero.gallery.0.tag', label: 'Tarjeta 1 — etiqueta', type: 'text' },
+      { key: 'hero.gallery.0.image', label: 'Tarjeta 1 — imagen', type: 'image' },
+      { key: 'hero.gallery.1.tag', label: 'Tarjeta 2 — etiqueta', type: 'text' },
+      { key: 'hero.gallery.1.image', label: 'Tarjeta 2 — imagen', type: 'image' },
+      { key: 'hero.gallery.2.tag', label: 'Tarjeta 3 — etiqueta', type: 'text' },
+      { key: 'hero.gallery.2.image', label: 'Tarjeta 3 — imagen', type: 'image' },
+      { key: 'hero.gallery.3.tag', label: 'Tarjeta 4 — etiqueta', type: 'text' },
+      { key: 'hero.gallery.3.image', label: 'Tarjeta 4 — imagen', type: 'image' },
+      { key: 'hero.gallery.4.tag', label: 'Tarjeta 5 — etiqueta', type: 'text' },
+      { key: 'hero.gallery.4.image', label: 'Tarjeta 5 — imagen', type: 'image' },
+      { key: 'hero.gallery.5.tag', label: 'Tarjeta 6 — etiqueta', type: 'text' },
+      { key: 'hero.gallery.5.image', label: 'Tarjeta 6 — imagen', type: 'image' }
+    ]},
+    { section: 'Por qué nosotros', fields: [
+      { key: 'problema.titlePart1', label: 'Título — parte 1', type: 'text' },
+      { key: 'problema.titleHighlight', label: 'Título — parte destacada', type: 'text' },
+      { key: 'problema.titlePart2', label: 'Título — segunda línea', type: 'text' },
+      { key: 'problema.description', label: 'Descripción', type: 'textarea' },
+      { key: 'problema.features.0.icon', label: 'Bloque 1 — icono', type: 'text' },
+      { key: 'problema.features.0.label', label: 'Bloque 1 — etiqueta pequeña', type: 'text' },
+      { key: 'problema.features.0.title', label: 'Bloque 1 — título', type: 'text' },
+      { key: 'problema.features.0.text', label: 'Bloque 1 — texto', type: 'textarea' },
+      { key: 'problema.features.1.icon', label: 'Bloque 2 — icono', type: 'text' },
+      { key: 'problema.features.1.label', label: 'Bloque 2 — etiqueta pequeña', type: 'text' },
+      { key: 'problema.features.1.title', label: 'Bloque 2 — título', type: 'text' },
+      { key: 'problema.features.1.text', label: 'Bloque 2 — texto', type: 'textarea' },
+      { key: 'problema.features.2.icon', label: 'Bloque 3 — icono', type: 'text' },
+      { key: 'problema.features.2.label', label: 'Bloque 3 — etiqueta pequeña', type: 'text' },
+      { key: 'problema.features.2.title', label: 'Bloque 3 — título', type: 'text' },
+      { key: 'problema.features.2.text', label: 'Bloque 3 — texto', type: 'textarea' }
+    ]},
+    { section: 'Estilos', fields: [
+      { key: 'estilos.titlePart1', label: 'Título — parte 1', type: 'text' },
+      { key: 'estilos.titleHighlight', label: 'Título — parte destacada', type: 'text' },
+      { key: 'estilos.description', label: 'Descripción', type: 'textarea' },
+      { key: 'estilos.cards.0.label', label: 'Estilo 1 — nombre', type: 'text' },
+      { key: 'estilos.cards.0.image', label: 'Estilo 1 — imagen', type: 'image' },
+      { key: 'estilos.cards.1.label', label: 'Estilo 2 — nombre', type: 'text' },
+      { key: 'estilos.cards.1.image', label: 'Estilo 2 — imagen', type: 'image' },
+      { key: 'estilos.cards.2.label', label: 'Estilo 3 — nombre', type: 'text' },
+      { key: 'estilos.cards.2.image', label: 'Estilo 3 — imagen', type: 'image' },
+      { key: 'estilos.cards.3.label', label: 'Estilo 4 — nombre', type: 'text' },
+      { key: 'estilos.cards.3.image', label: 'Estilo 4 — imagen', type: 'image' }
+    ]},
+    { section: 'Resultados (números)', fields: [
+      { key: 'stats.titlePart1', label: 'Título — parte 1', type: 'text' },
+      { key: 'stats.titleHighlight', label: 'Título — parte destacada', type: 'text' },
+      { key: 'stats.titlePart2', label: 'Título — parte 3', type: 'text' },
+      { key: 'stats.description', label: 'Descripción', type: 'textarea' },
+      { key: 'stats.items.0.number', label: 'Número 1', type: 'text' },
+      { key: 'stats.items.0.label', label: 'Número 1 — etiqueta', type: 'text' },
+      { key: 'stats.items.0.desc', label: 'Número 1 — descripción', type: 'textarea' },
+      { key: 'stats.items.1.number', label: 'Número 2', type: 'text' },
+      { key: 'stats.items.1.label', label: 'Número 2 — etiqueta', type: 'text' },
+      { key: 'stats.items.1.desc', label: 'Número 2 — descripción', type: 'textarea' }
+    ]},
+    { section: 'Galería / portfolio', fields: [
+      { key: 'galeria.images.0', label: 'Foto 1', type: 'image' },
+      { key: 'galeria.images.1', label: 'Foto 2', type: 'image' },
+      { key: 'galeria.images.2', label: 'Foto 3', type: 'image' },
+      { key: 'galeria.images.3', label: 'Foto 4', type: 'image' },
+      { key: 'galeria.images.4', label: 'Foto 5', type: 'image' },
+      { key: 'galeria.images.5', label: 'Foto 6', type: 'image' },
+      { key: 'galeria.kicker', label: 'Texto sobre la galería', type: 'text' },
+      { key: 'galeria.badge', label: 'Insignia de la galería', type: 'text' }
+    ]},
+    { section: 'Precios / agenda tu cita', fields: [
+      { key: 'precios.titlePart1', label: 'Título — parte 1', type: 'text' },
+      { key: 'precios.titleHighlight', label: 'Título — parte destacada', type: 'text' },
+      { key: 'precios.benefits.0.icon', label: 'Beneficio 1 — icono', type: 'text' },
+      { key: 'precios.benefits.0.title', label: 'Beneficio 1 — título', type: 'text' },
+      { key: 'precios.benefits.0.desc', label: 'Beneficio 1 — descripción', type: 'textarea' },
+      { key: 'precios.benefits.1.icon', label: 'Beneficio 2 — icono', type: 'text' },
+      { key: 'precios.benefits.1.title', label: 'Beneficio 2 — título', type: 'text' },
+      { key: 'precios.benefits.1.desc', label: 'Beneficio 2 — descripción', type: 'textarea' },
+      { key: 'precios.benefits.2.icon', label: 'Beneficio 3 — icono', type: 'text' },
+      { key: 'precios.benefits.2.title', label: 'Beneficio 3 — título', type: 'text' },
+      { key: 'precios.benefits.2.desc', label: 'Beneficio 3 — descripción', type: 'textarea' },
+      { key: 'precios.cardTag', label: 'Tarjeta — insignia', type: 'text' },
+      { key: 'precios.cardPrice', label: 'Tarjeta — precio', type: 'text' },
+      { key: 'precios.cardPriceMeta', label: 'Tarjeta — detalle del precio', type: 'text' },
+      { key: 'precios.cardList.0', label: 'Tarjeta — punto 1', type: 'text' },
+      { key: 'precios.cardList.1', label: 'Tarjeta — punto 2', type: 'text' },
+      { key: 'precios.cardList.2', label: 'Tarjeta — punto 3', type: 'text' },
+      { key: 'precios.cardList.3', label: 'Tarjeta — punto 4', type: 'text' },
+      { key: 'precios.cardCtaLabel', label: 'Tarjeta — texto del botón', type: 'text' },
+      { key: 'precios.cardGuarantee', label: 'Tarjeta — texto de garantía', type: 'text' }
+    ]},
+    { section: 'Testimonio grande', fields: [
+      { key: 'opiniones.quote', label: 'Cita', type: 'textarea' },
+      { key: 'opiniones.highlight', label: 'Frase destacada dentro de la cita', type: 'text' },
+      { key: 'opiniones.authorName', label: 'Nombre del autor', type: 'text' },
+      { key: 'opiniones.authorRole', label: 'Detalle del autor', type: 'text' }
+    ]},
+    { section: 'Pie de página', fields: [
+      { key: 'footer.description', label: 'Descripción del estudio', type: 'textarea' },
+      { key: 'footer.badge', label: 'Insignia', type: 'text' },
+      { key: 'footer.legal', label: 'Texto legal', type: 'text' },
+      { key: 'footer.madeBy', label: 'Crédito "Hecho por..."', type: 'text' }
+    ]}
+  ];
+
+  var GITHUB_API = 'https://api.github.com';
+  var SAFE_URL_SCHEMES = ['http:', 'https:', 'mailto:', 'tel:'];
+
+  var state = {
+    content: null,       // último contenido conocido (publicado)
+    pendingUploads: {},  // key -> { file, path }
+    conn: { owner: '', repo: '', branch: 'main', token: '' }
+  };
+
+  /* ================= Utilidades de rutas ================= */
+  function getPath(obj, path) {
+    var parts = path.split('.');
+    var cur = obj;
+    for (var i = 0; i < parts.length; i++) {
+      if (cur === null || cur === undefined) return undefined;
+      cur = cur[parts[i]];
+    }
+    return cur;
+  }
+
+  function setPath(obj, path, value) {
+    var parts = path.split('.');
+    var cur = obj;
+    for (var i = 0; i < parts.length - 1; i++) {
+      var key = parts[i];
+      var nextKey = parts[i + 1];
+      var isNextArray = /^\d+$/.test(nextKey);
+      if (cur[key] === undefined || cur[key] === null) {
+        cur[key] = isNextArray ? [] : {};
+      }
+      cur = cur[key];
+    }
+    cur[parts[parts.length - 1]] = value;
+  }
+
+  function deepClone(obj) { return JSON.parse(JSON.stringify(obj)); }
+
+  function isSafeUrl(value) {
+    if (typeof value !== 'string' || !value) return false;
+    if (value.charAt(0) === '#' || value.charAt(0) === '/') return true;
+    try {
+      var url = new URL(value, window.location.href);
+      return SAFE_URL_SCHEMES.indexOf(url.protocol) !== -1;
+    } catch (e) { return false; }
+  }
+
+  /* ================= Bloqueo con clave local ================= */
+  var lockScreen = document.getElementById('lockScreen');
+  var panel = document.getElementById('panel');
+  var lockInput = document.getElementById('lockInput');
+  var lockSubmit = document.getElementById('lockSubmit');
+  var lockError = document.getElementById('lockError');
+  var lockText = document.getElementById('lockText');
+
+  function initLock() {
+    var saved = localStorage.getItem('tn_admin_passphrase');
+    if (!saved) {
+      lockText.textContent = 'Es la primera vez que abres el panel: escribe la clave que quieras usar de ahora en adelante. Solo se guarda en este navegador.';
+    }
+    if (sessionStorage.getItem('tn_admin_unlocked') === '1') {
+      showPanel();
+      return;
+    }
+    lockSubmit.addEventListener('click', tryUnlock);
+    lockInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') tryUnlock(); });
+  }
+
+  function tryUnlock() {
+    var saved = localStorage.getItem('tn_admin_passphrase');
+    var value = lockInput.value;
+    if (!value) return;
+    if (!saved) {
+      localStorage.setItem('tn_admin_passphrase', value);
+      sessionStorage.setItem('tn_admin_unlocked', '1');
+      showPanel();
+      return;
+    }
+    if (value === saved) {
+      sessionStorage.setItem('tn_admin_unlocked', '1');
+      showPanel();
+    } else {
+      lockError.style.display = 'block';
+    }
+  }
+
+  function showPanel() {
+    lockScreen.style.display = 'none';
+    panel.style.display = 'block';
+    initAdmin();
+  }
+
+  /* ================= Inicialización del panel ================= */
+  var previewFrame = document.getElementById('previewFrame');
+  var previewReady = false;
+  var formCol = document.getElementById('formCol');
+  var banner = document.getElementById('banner');
+  var connStatus = document.getElementById('connStatus');
+  var connStatusText = document.getElementById('connStatusText');
+  var previewTimer = null;
+
+  function initAdmin() {
+    loadConnection();
+    renderConnectionSection();
+    fetchPublishedContent();
+
+    previewFrame.addEventListener('load', function () {
+      previewReady = true;
+      sendPreview();
+    });
+
+    document.getElementById('btnPublish').addEventListener('click', publishChanges);
+    document.getElementById('btnReset').addEventListener('click', function () {
+      if (confirm('¿Descartar todos los cambios sin publicar y volver a lo que está en línea ahora mismo?')) {
+        state.pendingUploads = {};
+        fetchPublishedContent(true);
+      }
+    });
+  }
+
+  function loadConnection() {
+    state.conn.owner = localStorage.getItem('tn_admin_owner') || 'mfmartinez128';
+    state.conn.repo = localStorage.getItem('tn_admin_repo') || 'tinta-negra-tattoo';
+    state.conn.branch = localStorage.getItem('tn_admin_branch') || 'main';
+    state.conn.token = localStorage.getItem('tn_admin_token') || '';
+    updateConnStatus();
+  }
+
+  function updateConnStatus(ok, msg) {
+    connStatus.classList.remove('is-ok', 'is-error');
+    if (ok === true) {
+      connStatus.classList.add('is-ok');
+      connStatusText.textContent = msg || 'Conectado';
+    } else if (ok === false) {
+      connStatus.classList.add('is-error');
+      connStatusText.textContent = msg || 'Error de conexión';
+    } else {
+      connStatusText.textContent = state.conn.token ? 'Token guardado (sin probar)' : 'Sin conectar';
+    }
+  }
+
+  function showBanner(text, type) {
+    banner.textContent = text;
+    banner.className = 'banner is-visible' + (type ? ' is-' + type : '');
+  }
+
+  function hideBanner() {
+    banner.className = 'banner';
+  }
+
+  /* ================= Sección de conexión con GitHub ================= */
+  function renderConnectionSection() {
+    var section = document.createElement('div');
+    section.className = 'admin-section is-open';
+    section.innerHTML =
+      '<div class="admin-section__head"><h2>Conexión con GitHub</h2><span class="admin-section__chevron">▾</span></div>' +
+      '<div class="admin-section__body">' +
+      '<div class="conn-grid">' +
+      '<div class="field"><label>Usuario u organización</label><input type="text" id="connOwner" placeholder="mfmartinez128"></div>' +
+      '<div class="field"><label>Repositorio</label><input type="text" id="connRepo" placeholder="tinta-negra-tattoo"></div>' +
+      '<div class="field"><label>Rama</label><input type="text" id="connBranch" placeholder="main"></div>' +
+      '<div class="field"><label>Token de acceso personal</label><input type="password" id="connToken" placeholder="github_pat_..."></div>' +
+      '</div>' +
+      '<div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.4rem;">' +
+      '<button class="btn btn--ghost btn--sm-admin" id="connSave">Guardar conexión</button>' +
+      '<button class="btn btn--ghost btn--sm-admin" id="connTest">Probar conexión</button>' +
+      '<button class="btn btn--ghost btn--sm-admin" id="connForget">Olvidar token</button>' +
+      '</div>' +
+      '<p class="muted-note">El token solo se guarda en este navegador (localStorage) y solo se usa para publicar directamente en tu repositorio de GitHub. Nunca se envía a ningún otro sitio ni se sube al repositorio. Necesita permiso de escritura de "Contents" sobre este repositorio únicamente — usa un token de tipo <em>fine-grained</em> limitado a este repo.</p>' +
+      '</div>';
+    formCol.appendChild(section);
+    wireCollapsible(section);
+
+    document.getElementById('connOwner').value = state.conn.owner;
+    document.getElementById('connRepo').value = state.conn.repo;
+    document.getElementById('connBranch').value = state.conn.branch;
+    document.getElementById('connToken').value = state.conn.token;
+
+    document.getElementById('connSave').addEventListener('click', function () {
+      state.conn.owner = document.getElementById('connOwner').value.trim();
+      state.conn.repo = document.getElementById('connRepo').value.trim();
+      state.conn.branch = document.getElementById('connBranch').value.trim() || 'main';
+      state.conn.token = document.getElementById('connToken').value.trim();
+      localStorage.setItem('tn_admin_owner', state.conn.owner);
+      localStorage.setItem('tn_admin_repo', state.conn.repo);
+      localStorage.setItem('tn_admin_branch', state.conn.branch);
+      localStorage.setItem('tn_admin_token', state.conn.token);
+      updateConnStatus();
+      showBanner('Conexión guardada en este navegador.', 'success');
+    });
+
+    document.getElementById('connTest').addEventListener('click', testConnection);
+
+    document.getElementById('connForget').addEventListener('click', function () {
+      state.conn.token = '';
+      document.getElementById('connToken').value = '';
+      localStorage.removeItem('tn_admin_token');
+      updateConnStatus();
+      showBanner('Token olvidado en este navegador.', 'success');
+    });
+  }
+
+  function githubHeaders(json) {
+    var headers = {
+      'Authorization': 'token ' + state.conn.token,
+      'Accept': 'application/vnd.github+json'
+    };
+    if (json) headers['Content-Type'] = 'application/json';
+    return headers;
+  }
+
+  function repoUrl(path) {
+    return GITHUB_API + '/repos/' + encodeURIComponent(state.conn.owner) + '/' + encodeURIComponent(state.conn.repo) + '/contents/' + path;
+  }
+
+  function testConnection() {
+    if (!state.conn.owner || !state.conn.repo || !state.conn.token) {
+      updateConnStatus(false, 'Faltan datos');
+      showBanner('Completa usuario, repositorio y token antes de probar la conexión.', 'error');
+      return;
+    }
+    updateConnStatus(null, 'Probando...');
+    fetch(GITHUB_API + '/repos/' + encodeURIComponent(state.conn.owner) + '/' + encodeURIComponent(state.conn.repo), {
+      headers: githubHeaders()
+    }).then(function (res) {
+      if (res.status === 401) throw new Error('Token inválido o sin permisos.');
+      if (res.status === 404) throw new Error('No se encontró el repositorio (revisa usuario/repo o los permisos del token).');
+      if (!res.ok) throw new Error('Error ' + res.status + ' al conectar con GitHub.');
+      return res.json();
+    }).then(function (repoData) {
+      var canWrite = repoData.permissions && repoData.permissions.push;
+      if (canWrite === false) {
+        updateConnStatus(false, 'Sin permiso de escritura');
+        showBanner('El token puede leer el repositorio pero no tiene permiso de escritura ("Contents: Read and write").', 'error');
+        return;
+      }
+      updateConnStatus(true, 'Conectado');
+      showBanner('Conexión correcta. Ya puedes publicar cambios.', 'success');
+    }).catch(function (err) {
+      updateConnStatus(false, 'Error');
+      showBanner(err.message, 'error');
+    });
+  }
+
+  /* ================= Carga del contenido publicado ================= */
+  function fetchPublishedContent(isReset) {
+    fetch('content.json', { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('No se pudo leer content.json (' + res.status + ')');
+        return res.json();
+      })
+      .then(function (content) {
+        state.content = content;
+        renderSchemaSections();
+        sendPreview();
+        if (isReset) showBanner('Cambios descartados: formulario restaurado a lo publicado.', 'success');
+      })
+      .catch(function (err) {
+        showBanner('No se pudo cargar content.json: ' + err.message, 'error');
+      });
+  }
+
+  /* ================= Render del formulario a partir del esquema ================= */
+  function wireCollapsible(section) {
+    var head = section.querySelector('.admin-section__head');
+    head.addEventListener('click', function () {
+      section.classList.toggle('is-open');
+    });
+  }
+
+  function renderSchemaSections() {
+    // Elimina secciones de esquema previas (deja la de conexión, que es la primera hija)
+    Array.prototype.slice.call(formCol.querySelectorAll('.admin-section[data-schema]')).forEach(function (el) {
+      el.remove();
+    });
+
+    SCHEMA.forEach(function (group, groupIndex) {
+      var section = document.createElement('div');
+      section.className = 'admin-section' + (groupIndex === 0 ? ' is-open' : '');
+      section.setAttribute('data-schema', '1');
+
+      var head = document.createElement('div');
+      head.className = 'admin-section__head';
+      head.innerHTML = '<h2>' + escapeHtml(group.section) + '</h2><span class="admin-section__chevron">▾</span>';
+      section.appendChild(head);
+
+      var body = document.createElement('div');
+      body.className = 'admin-section__body';
+
+      group.fields.forEach(function (field) {
+        body.appendChild(buildField(field));
+      });
+
+      section.appendChild(body);
+      formCol.appendChild(section);
+      wireCollapsible(section);
+    });
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function buildField(field) {
+    var wrap = document.createElement('div');
+    wrap.className = 'field';
+
+    if (field.type === 'image') {
+      wrap.appendChild(buildImageField(field));
+      return wrap;
+    }
+
+    var label = document.createElement('label');
+    label.textContent = field.label;
+    wrap.appendChild(label);
+
+    var input;
+    if (field.type === 'textarea') {
+      input = document.createElement('textarea');
+    } else {
+      input = document.createElement('input');
+      input.type = field.type === 'url' ? 'url' : 'text';
+    }
+    input.value = getPath(state.content, field.key) || '';
+    input.setAttribute('data-field-key', field.key);
+    input.addEventListener('input', debouncedPreview);
+    wrap.appendChild(input);
+
+    if (field.type === 'url') {
+      var hint = document.createElement('p');
+      hint.className = 'field-hint';
+      hint.textContent = 'Debe empezar con https:// (o mailto:/tel:).';
+      wrap.appendChild(hint);
+    }
+
+    return wrap;
+  }
+
+  function buildImageField(field) {
+    var wrap = document.createElement('div');
+    wrap.className = 'image-field';
+
+    var currentValue = getPath(state.content, field.key) || '';
+
+    var thumb = document.createElement('div');
+    thumb.className = 'image-field__thumb';
+    if (currentValue) thumb.style.backgroundImage = 'url(' + JSON.stringify(currentValue) + ')';
+
+    var controls = document.createElement('div');
+    controls.className = 'image-field__controls';
+
+    var label = document.createElement('label');
+    label.textContent = field.label;
+    controls.appendChild(label);
+
+    var urlInput = document.createElement('input');
+    urlInput.type = 'text';
+    urlInput.value = currentValue;
+    urlInput.setAttribute('data-field-key', field.key);
+    urlInput.placeholder = 'URL de la imagen o ruta assets/img/...';
+    controls.appendChild(urlInput);
+
+    var fileBtn = document.createElement('label');
+    fileBtn.className = 'file-btn';
+    fileBtn.innerHTML = '📤 Subir imagen<input type="file" accept="image/*">';
+    controls.appendChild(fileBtn);
+
+    var hint = document.createElement('p');
+    hint.className = 'field-hint';
+    hint.textContent = 'Puedes pegar una URL o subir un archivo (se guarda en assets/img/ al publicar).';
+    controls.appendChild(hint);
+
+    urlInput.addEventListener('input', function () {
+      delete state.pendingUploads[field.key];
+      if (urlInput.value) thumb.style.backgroundImage = 'url(' + JSON.stringify(urlInput.value) + ')';
+      debouncedPreview();
+    });
+
+    fileBtn.querySelector('input[type="file"]').addEventListener('change', function (e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var safeName = file.name.toLowerCase().replace(/[^a-z0-9.\-]/g, '-');
+      var path = 'assets/img/upload-' + Date.now() + '-' + safeName;
+      var objectUrl = URL.createObjectURL(file);
+      state.pendingUploads[field.key] = { file: file, path: path, previewUrl: objectUrl };
+      urlInput.value = path;
+      thumb.style.backgroundImage = 'url(' + JSON.stringify(objectUrl) + ')';
+      debouncedPreview();
+    });
+
+    wrap.appendChild(thumb);
+    wrap.appendChild(controls);
+    return wrap;
+  }
+
+  /* ================= Construcción del borrador y vista previa ================= */
+  function buildDraftContent(forPreview) {
+    var draft = deepClone(state.content || {});
+    SCHEMA.forEach(function (group) {
+      group.fields.forEach(function (field) {
+        var el = formCol.querySelector('[data-field-key="' + field.key + '"]');
+        if (!el) return;
+        var value = el.value;
+        if (forPreview && state.pendingUploads[field.key]) {
+          value = state.pendingUploads[field.key].previewUrl;
+        }
+        setPath(draft, field.key, value);
+      });
+    });
+    return draft;
+  }
+
+  function debouncedPreview() {
+    if (previewTimer) clearTimeout(previewTimer);
+    previewTimer = setTimeout(sendPreview, 250);
+  }
+
+  function sendPreview() {
+    if (!previewReady || !state.content) return;
+    var draft = buildDraftContent(true);
+    previewFrame.contentWindow.postMessage({ type: 'tinta-negra-preview', content: draft }, window.location.origin);
+  }
+
+  /* ================= Publicar ================= */
+  function base64EncodeUnicode(str) {
+    var bytes = new TextEncoder().encode(str);
+    var binary = '';
+    bytes.forEach(function (b) { binary += String.fromCharCode(b); });
+    return btoa(binary);
+  }
+
+  function fileToBase64(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        var result = reader.result;
+        var base64 = result.substring(result.indexOf(',') + 1);
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function ghPut(path, base64Content, message, sha) {
+    var body = { message: message, content: base64Content, branch: state.conn.branch };
+    if (sha) body.sha = sha;
+    return fetch(repoUrl(path), {
+      method: 'PUT',
+      headers: githubHeaders(true),
+      body: JSON.stringify(body)
+    }).then(function (res) {
+      if (!res.ok) {
+        return res.json().catch(function () { return {}; }).then(function (errBody) {
+          throw new Error('Error ' + res.status + ' subiendo ' + path + (errBody.message ? ': ' + errBody.message : ''));
+        });
+      }
+      return res.json();
+    });
+  }
+
+  function ghGetSha(path) {
+    return fetch(repoUrl(path) + '?ref=' + encodeURIComponent(state.conn.branch), {
+      headers: githubHeaders()
+    }).then(function (res) {
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Error ' + res.status + ' leyendo ' + path);
+      return res.json().then(function (data) { return data.sha; });
+    });
+  }
+
+  function publishChanges() {
+    if (!state.conn.owner || !state.conn.repo || !state.conn.token) {
+      showBanner('Completa y guarda la conexión con GitHub (usuario, repositorio y token) antes de publicar.', 'error');
+      formCol.querySelector('.admin-section').classList.add('is-open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Valida los links antes de publicar
+    var invalidUrl = null;
+    SCHEMA.forEach(function (group) {
+      group.fields.forEach(function (field) {
+        if (field.type !== 'url') return;
+        var el = formCol.querySelector('[data-field-key="' + cssEscape(field.key) + '"]');
+        if (el && el.value && !isSafeUrl(el.value)) invalidUrl = field.label;
+      });
+    });
+    if (invalidUrl) {
+      showBanner('El campo "' + invalidUrl + '" no parece una URL válida (debe empezar con https://, mailto: o tel:).', 'error');
+      return;
+    }
+
+    var publishBtn = document.getElementById('btnPublish');
+    publishBtn.disabled = true;
+    publishBtn.textContent = 'Publicando…';
+    hideBanner();
+
+    var uploadKeys = Object.keys(state.pendingUploads);
+
+    var uploadChain = Promise.resolve();
+    uploadKeys.forEach(function (key) {
+      var upload = state.pendingUploads[key];
+      uploadChain = uploadChain.then(function () {
+        return fileToBase64(upload.file).then(function (base64) {
+          return ghPut(upload.path, base64, 'Subir imagen: ' + upload.path);
+        });
+      });
+    });
+
+    uploadChain
+      .then(function () { return ghGetSha('content.json'); })
+      .then(function (sha) {
+        var draft = buildDraftContent();
+        var json = JSON.stringify(draft, null, 2);
+        return ghPut('content.json', base64EncodeUnicode(json), 'Actualizar contenido del sitio desde el panel de control', sha);
+      })
+      .then(function () {
+        state.pendingUploads = {};
+        publishBtn.disabled = false;
+        publishBtn.textContent = 'Publicar cambios';
+        showBanner('Publicado. GitHub Pages puede tardar ~1 minuto en mostrar los cambios en la web real.', 'success');
+        fetchPublishedContent();
+      })
+      .catch(function (err) {
+        publishBtn.disabled = false;
+        publishBtn.textContent = 'Publicar cambios';
+        showBanner(err.message, 'error');
+      });
+  }
+
+  initLock();
+})();
+</script>
+</body>
+</html>
