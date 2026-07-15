@@ -988,7 +988,7 @@
     SCHEMA.forEach(function (group) {
       group.fields.forEach(function (field) {
         if (field.type !== 'url') return;
-        var el = formCol.querySelector('[data-field-key="' + cssEscape(field.key) + '"]');
+        var el = formCol.querySelector('[data-field-key="' + field.key + '"]');
         if (el && el.value && !isSafeUrl(el.value)) invalidUrl = field.label;
       });
     });
