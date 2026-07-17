@@ -178,6 +178,21 @@ h1, h2, h3 {
   transform: translateY(0);
 }
 
+/* Zoom parallax de imágenes (GSAP + ScrollTrigger, ver script.js).
+   .media-zoom = contenedor que recorta; .media-zoom__img = capa que escala. */
+.media-zoom {
+  position: relative;
+  overflow: hidden;
+}
+
+.media-zoom__img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+
 /* ==========================================================================
    HEADER / NAVEGACIÓN
    ========================================================================== */
@@ -496,8 +511,6 @@ h1, h2, h3 {
 }
 
 .phantom-card--photo {
-  background-size: cover;
-  background-position: center;
   position: relative;
   justify-content: flex-end;
 }
@@ -506,13 +519,14 @@ h1, h2, h3 {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   border-radius: inherit;
   background: linear-gradient(180deg, rgba(10, 10, 13, 0.1) 0%, rgba(10, 10, 13, 0.85) 100%);
 }
 
 .phantom-card--photo .phantom-card__tag {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   background-color: rgba(10, 10, 13, 0.55);
   color: #f0f0f0;
 }
@@ -736,11 +750,14 @@ h1, h2, h3 {
 }
 
 .tools-card__body--photo {
-  background-size: cover;
-  background-position: center;
   color: #f0f0f0;
   font-weight: 600;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+.tools-card__body--photo span {
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 767px) {
@@ -834,8 +851,6 @@ h1, h2, h3 {
 }
 
 .gallery__card--photo {
-  background-size: cover;
-  background-position: center;
   filter: grayscale(0.25) brightness(0.75);
 }
 

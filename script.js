@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initTilt3D();
   initParallax();
+  initGsapImageZoom();
 });
 
 /* ---------- Menú móvil (hamburguesa) ---------- */
@@ -139,4 +140,39 @@ function initParallax() {
     },
     { passive: true }
   );
+}
+
+/* ---------- Zoom parallax de imágenes con GSAP + ScrollTrigger ---------- */
+function initGsapImageZoom() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    console.warn('[parallax] GSAP/ScrollTrigger no se cargó (¿sin conexión?); se omite el efecto.');
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const images = document.querySelectorAll('.media-zoom__img');
+  if (!images.length) return;
+
+  images.forEach((img) => {
+    gsap.fromTo(
+      img,
+      { scale: 1 },
+      {
+        scale: 1.18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: img.parentElement,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      }
+    );
+  });
+
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 }
