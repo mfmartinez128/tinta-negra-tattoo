@@ -69,6 +69,32 @@
       }
     ]
   },
+  "preciosEstilos": {
+    "kicker": "Precio orientativo en Barcelona",
+    "items": [
+      {
+        "style": "Fine line",
+        "desc": "Trazo fino, piezas pequeñas o minimalistas",
+        "price": "80€ – 250€"
+      },
+      {
+        "style": "Micro realismo",
+        "desc": "Detalle realista en formato reducido",
+        "price": "150€ – 350€"
+      },
+      {
+        "style": "Realismo",
+        "desc": "Piezas grandes y sesiones largas, se cobra por hora",
+        "price": "100€ – 150€/hora"
+      },
+      {
+        "style": "Blackwork",
+        "desc": "Desde piezas pequeñas hasta mangas completas",
+        "price": "100€ – 120€/hora"
+      }
+    ],
+    "note": "Precio final según tamaño, ubicación y número de sesiones — presupuesto cerrado gratis en la consulta."
+  },
   "estilos": {
     "titlePart1": "Tu tatuaje, en el estilo que",
     "titleHighlight": "tú quieras",

@@ -15,6 +15,10 @@
     - El contenido visible (textos, imágenes, links) se puede editar sin tocar
       código desde el panel de control: /admin.html — lee content.json en
       tiempo real vía content-loader.js.
+    - Precios de la guía por estilo (sección "Por qué nosotros"): son rangos
+      orientativos de placeholder para el mercado de Barcelona. Revísalos y
+      ajústalos a tus precios reales desde el panel de control antes de
+      publicar de verdad.
     ══════════════════════════════════════════════════════════════
   -->
 
@@ -182,16 +186,39 @@
           </div>
         </div>
 
-        <div class="device-mock reveal" aria-hidden="true">
-          <div class="device-mock__frame">
-            <div class="device-mock__topbar">Vista previa de tu diseño</div>
-            <div class="device-mock__grid">
-              <div class="device-mock__card"></div>
-              <div class="device-mock__card"></div>
-              <div class="device-mock__card device-mock__card--wide"></div>
-              <div class="device-mock__card"></div>
-            </div>
-          </div>
+        <div class="price-guide reveal">
+          <p class="price-guide__kicker" data-key="preciosEstilos.kicker">Precio orientativo en Barcelona</p>
+          <ul class="price-guide__list">
+            <li class="price-guide__item">
+              <div>
+                <p class="price-guide__style" data-key="preciosEstilos.items.0.style">Fine line</p>
+                <p class="price-guide__desc" data-key="preciosEstilos.items.0.desc">Trazo fino, piezas pequeñas o minimalistas</p>
+              </div>
+              <p class="price-guide__price" data-key="preciosEstilos.items.0.price">80€ – 250€</p>
+            </li>
+            <li class="price-guide__item">
+              <div>
+                <p class="price-guide__style" data-key="preciosEstilos.items.1.style">Micro realismo</p>
+                <p class="price-guide__desc" data-key="preciosEstilos.items.1.desc">Detalle realista en formato reducido</p>
+              </div>
+              <p class="price-guide__price" data-key="preciosEstilos.items.1.price">150€ – 350€</p>
+            </li>
+            <li class="price-guide__item">
+              <div>
+                <p class="price-guide__style" data-key="preciosEstilos.items.2.style">Realismo</p>
+                <p class="price-guide__desc" data-key="preciosEstilos.items.2.desc">Piezas grandes y sesiones largas, se cobra por hora</p>
+              </div>
+              <p class="price-guide__price" data-key="preciosEstilos.items.2.price">100€ – 150€/hora</p>
+            </li>
+            <li class="price-guide__item">
+              <div>
+                <p class="price-guide__style" data-key="preciosEstilos.items.3.style">Blackwork</p>
+                <p class="price-guide__desc" data-key="preciosEstilos.items.3.desc">Desde piezas pequeñas hasta mangas completas</p>
+              </div>
+              <p class="price-guide__price" data-key="preciosEstilos.items.3.price">100€ – 120€/hora</p>
+            </li>
+          </ul>
+          <p class="price-guide__note" data-key="preciosEstilos.note">Precio final según tamaño, ubicación y número de sesiones — presupuesto cerrado gratis en la consulta.</p>
         </div>
       </div>
     </div>
